@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StoryUIModel {
+struct StoryUIModel: Identifiable {
     var id: String
     var message: String
     var creationDate: String
