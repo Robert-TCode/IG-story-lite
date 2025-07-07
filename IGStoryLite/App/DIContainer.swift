@@ -46,5 +46,8 @@ final class DIContainer: ObservableObject {
         // 🔁 Shared singleton dependencies
         let apiClient = URLSessionAPIClient()
         registerSingleton(APIClient.self, instance: apiClient)
+
+        // 🔁 Feature-specific registration
+        StoriesDIContainer.register(in: self)
     }
 }

@@ -7,6 +7,6 @@
 
 protocol StoryRepository {
     func getStories(page: Int, limit: Int) async throws -> [Story]
-    func updateSeenState(for storyId: String, seen: Bool)
-    func updateLikedState(for storyId: String, liked: Bool)
+    func updateSeenState(for storyId: String, seen: Bool) async throws -> Story
+    func updateLikedState(for storyId: String, liked: Bool) async throws -> Story
 }

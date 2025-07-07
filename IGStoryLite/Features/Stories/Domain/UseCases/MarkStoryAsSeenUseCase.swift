@@ -6,5 +6,5 @@
 //
 
 protocol MarkStoryAsSeenUseCase {
-    func execute(storyId: String) async throws
+    func execute(storyId: String) async throws -> Story
 }
