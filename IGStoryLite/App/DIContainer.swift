@@ -42,5 +42,9 @@ final class DIContainer: ObservableObject {
 
     // MARK: - App-Specific Registration
 
-    func registerAppServices() {}
+    func registerAppServices() {
+        // 🔁 Shared singleton dependencies
+        let apiClient = URLSessionAPIClient()
+        registerSingleton(APIClient.self, instance: apiClient)
+    }
 }
