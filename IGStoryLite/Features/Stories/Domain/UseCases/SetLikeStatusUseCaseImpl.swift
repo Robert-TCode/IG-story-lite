@@ -14,7 +14,7 @@ final class SetLikeStatusUseCaseImpl: SetLikeStatusUseCase {
         self.repository = repository
     }
 
-    func execute(storyId: String, isLiked: Bool) async throws -> Story {
-        try await repository.updateLikedState(for: storyId, liked: isLiked)
+    func execute(storyId: String, isLiked: Bool) {
+        repository.updateLikedState(for: storyId, liked: isLiked)
     }
 }

@@ -6,5 +6,5 @@
 //
 
 protocol SetLikeStatusUseCase {
-    func execute(storyId: String, isLiked: Bool) async throws -> Story
+    func execute(storyId: String, isLiked: Bool)
 }

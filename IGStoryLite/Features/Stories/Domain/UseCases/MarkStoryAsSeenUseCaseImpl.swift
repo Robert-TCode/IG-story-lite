@@ -14,7 +14,7 @@ final class MarkStoryAsSeenUseCaseImpl: MarkStoryAsSeenUseCase {
         self.repository = repository
     }
 
-    func execute(storyId: String) async throws -> Story {
-        try await repository.updateSeenState(for: storyId, seen: true)
+    func execute(storyId: String) {
+        repository.updateSeenState(for: storyId, seen: true)
     }
 }
