@@ -20,6 +20,7 @@ struct StoriesView: View {
                 ForEach(Array(viewModel.stories.enumerated()), id: \.element.id) { index, story in
                     StoryView(
                         storyModel: story,
+                        onStoryAppear: { viewModel.onStoryAppear(story) },
                         onClose: viewModel.onCloseButtonTap,
                         onSendMessage: { viewModel.onSendMessageTap(story: story) },
                         onHeartTap: { viewModel.onHeartButtonTap(story: story) },

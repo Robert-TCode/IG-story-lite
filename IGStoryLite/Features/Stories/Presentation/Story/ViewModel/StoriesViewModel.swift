@@ -18,13 +18,19 @@ final class StoriesViewModel: ObservableObject {
     private let pageSize = 10
 
     private let fetchStoriesUseCase: FetchStoriesUseCase
+    private let markStoryAsSeenUseCase: MarkStoryAsSeenUseCase
+    private let setLikeStatusUseCase: SetLikeStatusUseCase
     private weak var navigator: StoryNavigationHandling?
 
     init(
         fetchStoriesUseCase: FetchStoriesUseCase,
+        markStoryAsSeenUseCase: MarkStoryAsSeenUseCase,
+        setLikeStatusUseCase: SetLikeStatusUseCase,
         navigator: StoryNavigationHandling
     ) {
         self.fetchStoriesUseCase = fetchStoriesUseCase
+        self.markStoryAsSeenUseCase = markStoryAsSeenUseCase
+        self.setLikeStatusUseCase = setLikeStatusUseCase
         self.navigator = navigator
     }
 
@@ -36,26 +42,57 @@ final class StoriesViewModel: ObservableObject {
         await loadNextPageIfNeeded()
     }
 
+    func onStoryAppear(_ story: StoryUIModel) {
+        markStoryAsSeenUseCase.execute(storyId: story.id)
+
+        if let index = stories.firstIndex(where: { $0.id == story.id }) {
+            var updated = stories[index]
+            updated.wasSeen = true
+            stories[index] = updated
+        }
+    }
+
     func onCloseButtonTap() {
-        // TODO
+        navigator?.closeStories()
     }
 
     func onHeartButtonTap(story: StoryUIModel) {
-        // TODO
+        setLikeStatusUseCase.execute(storyId: story.id, isLiked: !story.isLiked)
+
+        if let index = stories.firstIndex(where: { $0.id == story.id }) {
+            var updated = stories[index]
+            updated.isLiked.toggle()
+            stories[index] = updated
+        }
     }
 
     func onSendMessageTap(story: StoryUIModel) {
-        // TODO
+        // TODO: Implement interaction
     }
 
     func onStoryImageTap() {
-        // TODO
+        Task {
+            await advanceToNextStory()
+        }
     }
 }
 
 // MARK: - Helpers
 
 private extension StoriesViewModel {
+    func advanceToNextStory() async {
+        if currentIndex < stories.count - 1 {
+            currentIndex += 1
+        } else if !isLastPage {
+            await loadNextPageIfNeeded()
+            if currentIndex < stories.count - 1 {
+                currentIndex += 1
+            }
+        } else {
+            navigator?.closeStories()
+        }
+    }
+
     func loadNextPageIfNeeded() async {
         guard !isLoading && !isLastPage else { return }
 

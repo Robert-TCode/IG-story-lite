@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StoryView: View {
     let storyModel: StoryUIModel
+    let onStoryAppear: () -> Void
     let onClose: () -> Void
     let onSendMessage: () -> Void
     let onHeartTap: () -> Void
@@ -29,6 +30,7 @@ struct StoryView: View {
                 .padding(.top, AppPadding.large)
                 .padding(.horizontal, AppPadding.medium)
         }
+        .onAppear(perform: onStoryAppear)
     }
 
     // MARK: - Background Image with Tap
@@ -168,6 +170,7 @@ struct StoryView_Previews: PreviewProvider {
     static var previews: some View {
         StoryView(
             storyModel: StoryUIModel.mock,
+            onStoryAppear: {},
             onClose: {},
             onSendMessage: {},
             onHeartTap: {},

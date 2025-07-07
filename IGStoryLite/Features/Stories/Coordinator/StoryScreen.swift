@@ -9,7 +9,7 @@ import Foundation
 
 enum StoryScreen: AppScreen {
     case storyList
-    case story(Story)
+    case story
 
     var name: String {
         switch self {
