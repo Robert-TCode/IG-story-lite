@@ -3,6 +3,8 @@
 IGStoryLite is a modular, scalable iOS application that demonstrates a story-style feed experience inspired by Instagram. 
 It is designed with clean architecture principles, a strong emphasis on separation of concerns and flexibility, and modern SwiftUI practices.
 
+Short video presentation talking about technical decisions; https://www.loom.com/share/3ed93452d9074dedbd5685d6f702859e?sid=314e5939-2e88-44b8-96a1-856c6568e2f5
+
 ## 📱 Features
 
 - Horizontal story feed (Instagram-style) with user thumbnails
