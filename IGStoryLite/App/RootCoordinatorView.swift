@@ -18,7 +18,7 @@ struct RootCoordinatorView: View {
     var body: some View {
         switch appRouter.route {
         case .main:
-            Text("Auth not implemented")
+            StoryRootView(coordinator: StoryCoordinator(container: container))
 
         case .auth:
             // Auth flow not implemented for this challenge

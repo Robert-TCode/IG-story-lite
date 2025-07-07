@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Story: Identifiable, Equatable {
+struct Story: Identifiable, Equatable, Hashable {
     let id: String
     let message: String
     let createdAt: Date
