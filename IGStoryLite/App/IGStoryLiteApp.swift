@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct IGStoryLiteApp: App {
+    @StateObject private var appRouter = AppRouter()
+    private let container = AppDIBuilder.start()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootCoordinatorView(container: container)
+            .environmentObject(appRouter)
         }
     }
 }
